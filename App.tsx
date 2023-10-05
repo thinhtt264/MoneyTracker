@@ -17,6 +17,9 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { AppNavigation } from 'src/navigation/app-navigation';
+import { store } from 'src/store/store';
+import i18next from 'src/common/language/i18n';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -25,16 +28,11 @@ const App = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       {/* <StatusBar backgroundColor={'#0c0d0d'} barStyle={'light-content'} /> */}
       <SafeAreaProvider>
-        {/* <Provider store={store}>
+        <Provider store={store}>
           <I18nextProvider i18n={i18next}>
             <AppNavigation />
           </I18nextProvider>
-        </Provider> */}
-        <SafeAreaView>
-          <View>
-            <Text>sadas</Text>
-          </View>
-        </SafeAreaView>
+        </Provider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

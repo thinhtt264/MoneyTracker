@@ -1,8 +1,7 @@
 import React, { createRef, forwardRef, useImperativeHandle } from 'react';
-import { AppDispatch, RootState } from 'src/store/store';
+import { AppDispatch, RootState, store } from 'src/store/store';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { PersistState } from 'redux-persist/es/types';
-import { AppState } from 'src/models/App';
 import { PersistPartial } from 'redux-persist/es/persistReducer';
 
 export const useAppDispatch = () => useDispatch<AppDispatch | any>();
@@ -12,29 +11,25 @@ type ActionBase<T = any> = {
   type: string;
   payload?: T;
 };
+
 type RXStoreType = {
   dispatch: (action: any) => any;
-  getState: <K extends keyof RootState>(selector: K) => RootState[K];
+  getState: <K extends keyof RootState>(selector: K) => any;
 };
 
 const storeRef = createRef<RXStoreType>();
 
 export const RXStore = forwardRef((_, ref) => {
   const dispatchRx = useAppDispatch();
-  const store = useAppSelector(x => x);
   useImperativeHandle(
     storeRef,
     () => ({
       dispatch: (action: ActionBase) => {
         dispatchRx(action);
       },
-      getState: <K extends keyof RootState>(selector: K) => {
-        if (selector === '_persist') {
-          return store[selector] as unknown as ({
-            app: AppState & PersistPartial;
-          } & PersistPartial)[K];
-        }
-        return store[selector] as RootState[K];
+      getState: (state: keyof RootState) => {
+        const store = useAppSelector(x => x);
+        return store[state];
       },
     }),
     [dispatchRx, store],
