@@ -1,0 +1,39 @@
+{
+  "auth": {
+    "slogan": "Spend Smarter{{value}} Save More",
+    "start": "Get Started",
+    "yourEmail": "Email",
+    "yourPassword": "Password",
+    "rePassword": "Re-enter password",
+    "login": "Log In",
+    "register": "Register",
+    "dontHaveAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "or": "OR",
+    "loginFb": "Continue with Facebook",
+    "loginGoogle": "Continue with Google",
+    "yourName": "Your name"
+  },
+  "home": {
+    "hello": "Hello",
+    "totalbalance": "Total Balance",
+    "income": "Income",
+    "expense": "Expenses",
+    "seeall": "See all",
+    "transHistory": "Transactions History"
+  },
+  "validation": {
+    "require": "Required field",
+    "email": "Invalid email",
+    "confirmPass": "Password does not match",
+    "password": "Invalid password",
+    "minPassword": "At least 8 or more characters"
+  },
+  "load": {
+    "wait": "Please wait a minitues",
+    "connecting": "Connecting..."
+  },
+  "error": {
+    "auth/too-many-requests": "Access to this account has been temporarily disabled due to many failed login attempts."
+  }
+}
