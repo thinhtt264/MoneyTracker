@@ -34,6 +34,7 @@ const IntroductionComponent = () => {
           {translate('auth:slogan', { value: '\n' })}
         </BoldText>
         <Button
+          activeOpacity={1}
           title={translate('auth:start')}
           onPress={onStart}
           fullSize
@@ -69,5 +70,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: Colors.green.darker,
   },
-  btn: { marginTop: scale(20), shadowColor: Colors.green.medium },
+  btn: {
+    marginTop: scale(20),
+    shadowColor: Colors.green.medium,
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.6,
+    shadowRadius: 8,
+    elevation: 5,
+  },
 });

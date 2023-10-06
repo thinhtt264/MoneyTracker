@@ -5,6 +5,7 @@ import { RXStore, useAppDispatch, useAppSelector } from 'src/common/redux';
 import { navigationRef } from 'src/common/navigation';
 import RootNavigator from './root-navigator';
 import { MyAppTheme } from 'src/themes';
+import { appInit } from 'src/store/app-thunk';
 // import { AppLoader } from 'src/components/loader';
 
 export const AppNavigation = () => {
@@ -15,7 +16,7 @@ export const AppNavigation = () => {
 
   useEffect(() => {
     const init = async () => {
-    //   await dispatch(appInit());
+      await dispatch(appInit());
     };
     init().finally(() => {
       setTimeout(() => {

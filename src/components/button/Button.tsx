@@ -19,6 +19,7 @@ const ButtonComponent = (props: ButtonProps) => {
     textStyle,
     size,
     onPress,
+    ...Props
   } = props;
   return (
     <TouchableOpacity
@@ -44,7 +45,8 @@ const ButtonComponent = (props: ButtonProps) => {
           borderColor: Colors.green.default,
         },
         style,
-      ]}>
+      ]}
+      {...Props}>
       <BoldText
         textStyle={[
           styles.text,
