@@ -2,11 +2,18 @@ import {
   StackActions,
   createNavigationContainerRef,
 } from '@react-navigation/native';
-import { RouteNames } from 'src/navigation/RouteNames';
+import { RouteNames, ScreenNames } from 'src/navigation/RouteNames';
+
+export type RouteParams =
+  | {
+      screen?: ScreenNames;
+      params?: any;
+    }
+  | Object;
 
 export const navigationRef = createNavigationContainerRef<any>();
 
-export function navigate(name: RouteNames, params?: any) {
+export function navigate(name: RouteNames, params?: RouteParams) {
   navigationRef?.navigate(name, params);
 }
 
