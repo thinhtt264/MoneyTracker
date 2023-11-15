@@ -45,7 +45,6 @@ const MainStack = () => {
       <Stack.Screen
         name="HomeStack"
         component={HomeStack}
-        options={{ statusBarColor: '#429690' }}
       />
     </Stack.Navigator>
   );
