@@ -1,13 +1,20 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { HomeScreen } from 'src/screens';
 
 type Props = {};
+const Stack = createNativeStackNavigator<any>();
 
 const HomeStack = (props: Props) => {
   return (
-    <View>
-      <Text>HomeStack</Text>
-    </View>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen
+        name="Homepage"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 };
 

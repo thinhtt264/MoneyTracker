@@ -13,7 +13,7 @@ const initialState: AppState = {
   },
   showToastMessage: false,
   language: 'vi',
-  theme: 'dark',
+  theme: 'light',
   env: null,
 };
 

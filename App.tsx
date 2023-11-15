@@ -22,8 +22,6 @@ import { store } from 'src/store/store';
 import i18next from 'src/common/language/i18n';
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       {/* <StatusBar backgroundColor={'#0c0d0d'} barStyle={'light-content'} /> */}
