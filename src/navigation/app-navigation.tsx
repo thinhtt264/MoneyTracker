@@ -7,6 +7,7 @@ import RootNavigator from './root-navigator';
 import { MyAppTheme } from 'src/themes';
 import { appInit } from 'src/store/app-thunk';
 import { StatusBar } from 'react-native';
+import { isIos } from 'src/common/device';
 // import { AppLoader } from 'src/components/loader';
 
 export const AppNavigation = () => {
@@ -23,8 +24,10 @@ export const AppNavigation = () => {
       setTimeout(() => {
         setInit(true);
         RNBootSplash.hide({ fade: true }).then(() => {
-          StatusBar.setTranslucent(true);
-          StatusBar.setBackgroundColor('transparent');
+          if (!isIos) {
+            StatusBar.setTranslucent(true);
+            StatusBar.setBackgroundColor('transparent');
+          }
         });
       }, 1000);
     });
