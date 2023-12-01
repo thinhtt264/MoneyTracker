@@ -21,15 +21,13 @@ export const AppNavigation = () => {
       await dispatch(appInit());
     };
     init().finally(() => {
-      setTimeout(() => {
-        setInit(true);
-        RNBootSplash.hide({ fade: true }).then(() => {
-          if (!isIos) {
-            StatusBar.setTranslucent(true);
-            StatusBar.setBackgroundColor('transparent');
-          }
-        });
-      }, 1000);
+      setInit(true);
+      RNBootSplash.hide({ fade: true }).then(() => {
+        if (!isIos) {
+          StatusBar.setTranslucent(true);
+          StatusBar.setBackgroundColor('transparent');
+        }
+      });
     });
   }, []);
 

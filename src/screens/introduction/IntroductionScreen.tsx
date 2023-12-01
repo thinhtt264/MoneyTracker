@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import React, { memo, useLayoutEffect } from 'react';
+import { Image, StatusBar, StyleSheet, View } from 'react-native';
 import equals from 'react-fast-compare';
 import layout from 'src/themes/Layout';
 import { kHeight, kWidth } from 'src/common/constants';
@@ -19,6 +19,14 @@ const IntroductionComponent = () => {
   const onStart = () => {
     dispatch(appActions.onFirstTimeLauch());
   };
+
+  useLayoutEffect(() => {
+    StatusBar.setBarStyle('dark-content');
+    return () => {      
+      StatusBar.setBarStyle('light-content');
+    };
+  }, []);
+
   return (
     <View style={[layout.fill, styles.container]}>
       <View style={{ height: '65%' }}>

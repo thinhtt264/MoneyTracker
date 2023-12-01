@@ -1,69 +1,39 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 import React, { memo } from 'react';
+import Layout from 'src/themes/Layout';
 import equals from 'react-fast-compare';
-import { LinearView } from '../linearview';
-import layout from 'src/themes/layout';
-import { translate } from '../../utils/i18n/translate';
-import { BoldText } from '../text';
-import { fontScale, scale } from '../../common/scale/index';
-import Colors from 'src/themes/Colors';
-import { RegularText } from '../text/RegularText';
-import { BellIcon } from '../svg/Icon';
+import { scale } from 'src/common/scale/index';
+import { Images } from 'src/assests';
+import { HeaderProps } from './type';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-type Props = {};
+const LinearHeaderComponent = ({ children }: HeaderProps) => {
+  const insets = useSafeAreaInsets();
 
-const LinearHeaderComponent = (props: Props) => {
   return (
-    <LinearView
-      colors={['#429690', '#2A7C76']}
-      style={[layout.fill, styles.container]}>
-      <View
-        style={[
-          layout.column,
-          {
-            marginTop: scale(35),
-            paddingHorizontal: scale(20),
-          },
-        ]}>
-        <RegularText
-          textStyle={{
-            color: Colors.white.default,
-            fontSize: fontScale(15),
-          }}>
-          {translate('home:hello')},
-        </RegularText>
-        <View style={[layout.rowHBetween]}>
-          <BoldText
-            textStyle={{
-              fontSize: fontScale(20),
-              color: Colors.white.default,
-            }}>
-            Enjelin Morgeana
-          </BoldText>
-          <View style={styles.bellIcon}>
-            <BellIcon
-              color={Colors.orange.copper}
-              height={scale(25)}
-              width={scale(25)}
-              viewBox={`0 0 ${scale(22)} ${scale(22)}`}
-            />
-          </View>
+    <View style={{ height: '30%' }}>
+      <ImageBackground
+        style={[styles.bg]}
+        resizeMode="stretch"
+        source={Images.background_header}>
+        <View
+          style={[
+            Layout.rowVCenter,
+            styles.wrap,
+            { marginTop: insets.top + scale(40) },
+          ]}>
+          {children ? children : <View style={[]}></View>}
         </View>
-      </View>
-    </LinearView>
+      </ImageBackground>
+    </View>
   );
 };
 
 export const LinearHeader = memo(LinearHeaderComponent, equals);
 
 const styles = StyleSheet.create({
-  container: {},
-  bellIcon: {
-    marginTop: -scale(5),
-    width: scale(30),
-    height: scale(30),
-    backgroundColor: '#FFFFFF0F',
-    alignItems: 'center',
-    justifyContent: 'center',
+  bg: {
+    flex: 1,
   },
+  wrap: { justifyContent: 'space-between', paddingHorizontal: scale(20) },
 });

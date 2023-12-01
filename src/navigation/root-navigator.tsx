@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { useAppSelector } from 'src/common/redux';
 import { IntroductionScreen } from 'src/screens';
 import { MainStack } from './stacks';
+import { getTimeSinceStartup } from 'react-native-startup-time';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 export type RootStackParamList = {
@@ -13,6 +14,10 @@ export type RootStackParamList = {
 
 const RootNavigator: FC = () => {
   const { firstTimeLauch } = useAppSelector(state => state.app);
+  // getTimeSinceStartup().then(time => {
+  //   console.log(`Time since startup: ${time} ms`);
+  //   alert(time);
+  // });
   return (
     <RootStack.Navigator
       screenOptions={{ headerShown: false, animation: 'fade' }}>

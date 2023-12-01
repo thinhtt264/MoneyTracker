@@ -6,6 +6,7 @@
     "android": "yarn react-native run-android",
     "ios": "yarn react-native run-ios",
     "postinstall": "npx patch-package",
+    "android-release":"yarn android --mode release",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
@@ -33,6 +34,7 @@
     "react-native-reanimated": "^3.5.4",
     "react-native-safe-area-context": "^4.7.2",
     "react-native-screens": "^3.25.0",
+    "react-native-startup-time": "^2.1.0",
     "react-native-svg": "^14.0.0",
     "react-native-vector-icons": "^10.0.0",
     "react-redux": "^8.1.3",

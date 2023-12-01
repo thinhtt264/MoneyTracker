@@ -6,7 +6,6 @@ import {
 } from '@react-navigation/native-stack';
 import { isIos } from 'src/common/device';
 import { useAppSelector } from 'src/common/redux';
-import Colors from 'src/themes/Colors';
 import HomeStack from './HomeStack';
 
 export type MainStackParamList = {
