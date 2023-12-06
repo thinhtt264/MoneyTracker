@@ -8,7 +8,7 @@ import React, { memo, useCallback, useState } from 'react';
 import isEqual from 'react-fast-compare';
 import Layout from 'src/themes/Layout';
 import { ArrowBoxDownIcon, BoldText, SemiBoldText } from 'src/components';
-import { fontScale, formatCurrency, scale, translate } from 'src/common';
+import { fontScale, formatCurrency, isIos, scale, translate } from 'src/common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Colors from 'src/themes/Colors';
@@ -35,7 +35,6 @@ const CardBalanceComponent = ({
 }: Props) => {
   const [containerHeight, setContainerHeight] = useState(0);
   const [wrapHeight, setWrapHeight] = useState(0);
-  const animatedHeight = useSharedValue(0);
 
   const onContainerLayout = (event: LayoutChangeEvent) => {
     const { height } = event.nativeEvent.layout;
@@ -60,9 +59,8 @@ const CardBalanceComponent = ({
 
   const wrapAnimatedStyle = useAnimatedStyle(() => {
     'worklet';
-    animatedHeight.value = isExpand ? withTiming(wrapHeight) : withTiming(0);
     return {
-      height: animatedHeight.value,
+      height: isExpand ? withTiming(wrapHeight) : withTiming(0), //phải để trực tiếp vào tăng hiệu xuất cho android
     };
   }, [isExpand]);
 
