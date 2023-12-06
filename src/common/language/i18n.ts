@@ -1,10 +1,11 @@
 import i18next, { LanguageDetectorAsyncModule } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { resources } from './locales';
+import { store } from 'src/store/store';
 
-import { getState } from 'src/common/redux';
+const { getState } = store;
+const { language } = getState().app;
 
-const { language } = getState('app');
 
 const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
@@ -25,7 +26,7 @@ i18next
     compatibilityJSON: 'v3',
     fallbackLng: 'vi',
     resources: resources,
-    lng: 'vi',
+    lng: language,
     // have a common namespace used around the full app
     ns: ['common'],
     defaultNS: 'common',

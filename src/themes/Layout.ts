@@ -110,13 +110,13 @@ export default StyleSheet.create({
   /* Text Input */
 
   boxShadow: {
-    shadowOpacity: 0.09,
+    shadowOpacity: 0.7,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 5,
     },
-    shadowRadius: 10,
+    shadowRadius: 5,
     elevation: 3,
   },
   /* Shadow */

@@ -1,7 +1,7 @@
 export default {
   green: {
     default: '#63B5AF',
-    darker: '#438883',
+    darker: '#2F7E79',
     darker1: '#1B5C58',
     lighter: '#ECF9F8',
     lighter1: '#D0E5E4',

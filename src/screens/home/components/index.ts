@@ -1,2 +1,3 @@
 import { HeaderComponent } from './HeaderComponent';
-export { HeaderComponent };
+import { CardBalance } from './CardBalance';
+export { HeaderComponent, CardBalance };

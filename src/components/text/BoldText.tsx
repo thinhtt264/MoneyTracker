@@ -20,7 +20,7 @@ const BoldTextComponents = (props: CustomTextProps) => {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: fontScale(14),
+    fontSize: fontScale(16),
     fontWeight: 'bold',
     fontFamily: FONT_FAMILY.BOLD,
   },

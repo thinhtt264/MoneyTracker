@@ -20,7 +20,7 @@ const SemiBoldTextComponents = (props: CustomTextProps) => {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: fontScale(14),
+    fontSize: fontScale(16),
     fontWeight: '600',
     fontFamily: FONT_FAMILY.SEMI_BOLD,
   },

@@ -6,12 +6,22 @@ import { scale } from 'src/common/scale/index';
 import { Images } from 'src/assests';
 import { HeaderProps } from './type';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Animated, {
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 
-const LinearHeaderComponent = ({ children }: HeaderProps) => {
+const LinearHeaderComponent = ({ children, isExpand }: HeaderProps) => {
   const insets = useSafeAreaInsets();
 
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      height: isExpand ? withTiming('35%') : withTiming('30%'),
+    };
+  }, [isExpand]);
+
   return (
-    <View style={{ height: '30%' }}>
+    <Animated.View style={animatedStyle}>
       <ImageBackground
         style={[styles.bg]}
         resizeMode="stretch"
@@ -25,7 +35,7 @@ const LinearHeaderComponent = ({ children }: HeaderProps) => {
           {children ? children : <View style={[]}></View>}
         </View>
       </ImageBackground>
-    </View>
+    </Animated.View>
   );
 };
 

@@ -12,7 +12,7 @@ const initialState: AppState = {
     isShowAlert: false,
   },
   showToastMessage: false,
-  language: 'vi',
+  language: 'en',
   theme: 'light',
   env: null,
 };

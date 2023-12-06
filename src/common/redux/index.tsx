@@ -28,8 +28,8 @@ export const RXStore = forwardRef((_, ref) => {
         dispatchRx(action);
       },
       getState: (state: keyof RootState) => {
-        const store = useAppSelector(x => x);
-        return store[state];
+        const store = useAppSelector(x => x[state]);
+        return store;
       },
     }),
     [dispatchRx, store],

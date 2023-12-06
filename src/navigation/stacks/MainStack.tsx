@@ -23,8 +23,6 @@ const Stack = createNativeStackNavigator<MainStackParamList>();
 const MainStack = () => {
   const { loadingApp } = useAppSelector(state => state.app);
 
-  useEffect(() => {}, []);
-
   return (
     <Stack.Navigator
       screenOptions={{
