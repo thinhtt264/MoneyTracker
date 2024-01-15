@@ -14,7 +14,6 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Colors from 'src/themes/Colors';
 import Animated, {
   useAnimatedStyle,
-  useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 
@@ -24,6 +23,8 @@ type Props = {
   expense: string;
   onPressExpand: () => void;
   isExpand: boolean;
+  cardBalanceHeight: number;
+  setCardBalanceHeight: (height: number) => void;
 };
 
 const CardBalanceComponent = ({
@@ -32,13 +33,14 @@ const CardBalanceComponent = ({
   expense,
   onPressExpand,
   isExpand = true,
+  cardBalanceHeight,
+  setCardBalanceHeight,
 }: Props) => {
-  const [containerHeight, setContainerHeight] = useState(0);
   const [wrapHeight, setWrapHeight] = useState(0);
 
   const onContainerLayout = (event: LayoutChangeEvent) => {
     const { height } = event.nativeEvent.layout;
-    setContainerHeight(height / 1.55);
+    setCardBalanceHeight(height / 1.55);
   };
 
   const onWrapLayout = (event: LayoutChangeEvent) => {
@@ -73,7 +75,7 @@ const CardBalanceComponent = ({
       style={[
         Layout.boxShadow,
         styles.container,
-        { transform: [{ translateY: -containerHeight }], overflow: 'hidden' },
+        { transform: [{ translateY: -cardBalanceHeight }], overflow: 'hidden' },
       ]}
       onLayout={onContainerLayout}>
       <View style={[Layout.rowBetween]}>

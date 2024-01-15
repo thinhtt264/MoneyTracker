@@ -117,7 +117,7 @@ export default StyleSheet.create({
       height: 5,
     },
     shadowRadius: 5,
-    elevation: 3,
+    elevation: 10,
   },
   /* Shadow */
   shadow: {
