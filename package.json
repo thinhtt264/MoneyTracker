@@ -5,30 +5,58 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "android-release": "yarn android --mode release",
+    "ios-release": "yarn ios --mode release",
+    "clean-project": "react-native-clean-project",
+    "clean-android": "cd android && ./gradlew clean",
+    "pod-install": "cd ios && pod install",
+    "apk": "npm run clean-android && cd android && ./gradlew assembleRelease",
+    "postinstall": "patch-package",
     "lint": "eslint .",
-    "start": "react-native start",
-    "test": "jest"
+    "start": "react-native start"
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.5.19",
+    "@react-navigation/native": "^6.1.16",
+    "@react-navigation/native-stack": "^6.9.25",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "i18next": "^23.10.1",
+    "patch-package": "^8.0.0",
     "react": "18.2.0",
-    "react-native": "0.73.6"
+    "react-fast-compare": "^3.2.2",
+    "react-i18next": "^14.1.0",
+    "react-native": "0.73.6",
+    "react-native-bootsplash": "^5.4.1",
+    "react-native-gesture-handler": "^2.15.0",
+    "react-native-linear-gradient": "^2.8.3",
+    "react-native-reanimated": "^3.8.0",
+    "react-native-safe-area-context": "^4.9.0",
+    "react-native-screens": "^3.29.0",
+    "react-native-vector-icons": "^10.0.3",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@react-native-community/eslint-config": "^3.2.0",
     "@react-native/babel-preset": "0.73.21",
     "@react-native/eslint-config": "0.73.2",
     "@react-native/metro-config": "0.73.5",
     "@react-native/typescript-config": "0.73.1",
     "@types/react": "^18.2.6",
     "@types/react-test-renderer": "^18.0.0",
+    "add": "^2.0.6",
     "babel-jest": "^29.6.3",
     "eslint": "^8.19.0",
+    "eslint-plugin-react-native": "^4.1.0",
     "jest": "^29.6.3",
+    "metro-react-native-babel-preset": "^0.77.0",
     "prettier": "2.8.8",
+    "react-native-clean-project": "^4.0.3",
     "react-test-renderer": "18.2.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "yarn": "^1.22.22"
   },
   "engines": {
     "node": ">=18"
