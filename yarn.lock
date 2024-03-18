@@ -1131,7 +1131,7 @@
   resolved "https://registry.yarnpkg.com/@babel/regjsgen/-/regjsgen-0.8.0.tgz#f0ba69b075e1f05fb2825b7fad991e7adbb18310"
   integrity sha512-x/rqGMdzj+fWZvCOYForTghzbtqPDZ5gPwaoNGHdgDfF2QA/XZbCBp4Moo5scrkAMPhB7z26XM/AaHuIJdgauA==
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.20.0", "@babel/runtime@^7.23.2", "@babel/runtime@^7.23.9", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.20.0", "@babel/runtime@^7.23.2", "@babel/runtime@^7.23.7", "@babel/runtime@^7.23.9", "@babel/runtime@^7.8.4":
   version "7.24.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.24.0.tgz#584c450063ffda59697021430cb47101b085951e"
   integrity sha512-Chk32uHMg6TnQdvw2e9IlqPpFX/6NLuK0Ys2PqLb7/gL5uFn9mXvK715FGLlOLQrcO4qIkNHkvPGktzzXexsFw==
@@ -4240,6 +4240,14 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
+i18next-resources-for-ts@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/i18next-resources-for-ts/-/i18next-resources-for-ts-1.5.0.tgz#acf642715f010dbf07a10e3bfb316db10ad8305e"
+  integrity sha512-gzVYct/sMeeOzomK0+8nl7YSr61xiDzf4Kg51g7StBaXAaKE/Vb1CLNHZ8dY56sYz6qmbwHRYHqMPanGi0go4w==
+  dependencies:
+    "@babel/runtime" "^7.23.7"
+    yaml "^2.3.4"
+
 i18next@^23.10.1:
   version "23.10.1"
   resolved "https://registry.yarnpkg.com/i18next/-/i18next-23.10.1.tgz#217ce93b75edbe559ac42be00a20566b53937df6"
@@ -6283,6 +6291,11 @@ react-native-clean-project@^4.0.3:
   resolved "https://registry.yarnpkg.com/react-native-clean-project/-/react-native-clean-project-4.0.3.tgz#7ea174d2cb789e0c1d24defbeba561fcbf1beb9e"
   integrity sha512-tWNhac5R4BetY7sZSRgaWUDSMpT207nJRuUwMZInmYJR3HucMZGIIUaiDH/pbFxXSDq4GMj4P7FnHxGLDobJ8w==
 
+react-native-device-info@^10.13.1:
+  version "10.13.1"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-10.13.1.tgz#f87f44ba7b67933248be10ca302a4f2f6dbbdd4f"
+  integrity sha512-j/7Z+Yl9Cesjp8vKaVzbuJQKJSVs4ojXATt5WjwipZ0Ss0mBJjqtbc4x5dfZLmQ4y55VVa7c0v8KHca1iqY/TQ==
+
 react-native-gesture-handler@^2.15.0:
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.15.0.tgz#f8e6c0451a7bdf065edb7b9be605480db402baa0"
@@ -7667,7 +7680,7 @@ yallist@^4.0.0:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
-yaml@^2.2.1, yaml@^2.2.2:
+yaml@^2.2.1, yaml@^2.2.2, yaml@^2.3.4:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.4.1.tgz#2e57e0b5e995292c25c75d2658f0664765210eed"
   integrity sha512-pIXzoImaqmfOrL7teGUBt/T7ZDnyeGBWyXQBvOVhLkWLN37GXv8NMLK406UY6dS51JfcQHsmcW5cJ441bHg6Lg==

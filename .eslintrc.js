@@ -13,6 +13,7 @@ module.exports = {
     'react-native/no-inline-styles': 'off',
     'react-native/no-raw-text': 'off',
     'react-native/no-color-literals': 'warn',
+    'react-native/no-unused-styles': 'warn',
 
     'no-shadow': 'error',
     'no-unused-vars': 'error',
