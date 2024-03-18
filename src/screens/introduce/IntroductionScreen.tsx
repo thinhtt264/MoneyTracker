@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
-import { BoldText } from '@components';
+import { BoldText, Button } from '@components';
 import { Colors, Layout } from '@themes';
 import { fontScale, kHeight, scale, translate } from '@common';
 import { Images } from '@assests';
@@ -10,7 +10,7 @@ const IntroductionComponent = () => {
 
   return (
     <View style={[Layout.fill, styles.container]}>
-      <View style={{ height: '65%' }}>
+      <View style={styles.wrapImage}>
         <Image style={styles.imageBackground} source={Images.onboarding_logo} />
         <Image
           resizeMode="contain"
@@ -20,16 +20,16 @@ const IntroductionComponent = () => {
       </View>
       <View style={{ marginTop: scale(20), paddingHorizontal: scale(30) }}>
         <BoldText textStyle={styles.slogan}>
-          {translate('auth:slogan', { value: '\n' })}
+          {translate('auth.slogan', { value: '\n' })}
         </BoldText>
-        {/* <Button
+        <Button
           activeOpacity={1}
-          title={translate('auth:start')}
+          title={translate('auth.start')}
           onPress={onStart}
           fullSize
           textStyle={{ fontSize: fontScale(15) }}
           style={styles.btn}
-        /> */}
+        />
       </View>
     </View>
   );
@@ -39,15 +39,7 @@ export const IntroductionScreen = IntroductionComponent;
 
 const styles = StyleSheet.create({
   btn: {
-    elevation: 5,
-    marginTop: scale(20),
-    shadowColor: Colors.green.medium,
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.6,
-    shadowRadius: 8,
+    marginTop: scale(30),
   },
   container: { backgroundColor: Colors.white.default },
   image: {
@@ -64,10 +56,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     resizeMode: 'contain',
     right: 0,
+    width: '100%',
   },
   slogan: {
     color: Colors.green.darker,
     fontSize: fontScale(25),
     textAlign: 'center',
+  },
+  wrapImage: {
+    alignItems: 'flex-start',
+    height: '65%',
+    justifyContent: 'flex-start',
   },
 });

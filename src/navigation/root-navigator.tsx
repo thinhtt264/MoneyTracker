@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { IntroductionScreen } from '@screens';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeStack } from './stacks';
+import { useAppStore } from '@store';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 export type RootStackParamList = {
@@ -11,7 +12,7 @@ export type RootStackParamList = {
 };
 
 const RootNavigator: FC = () => {
-  const firstTimeLauch = true;
+  const firstTimeLauch = useAppStore(state => state.firstTimeLaunch);
   return (
     <RootStack.Navigator
       screenOptions={{ headerShown: false, animation: 'fade' }}>

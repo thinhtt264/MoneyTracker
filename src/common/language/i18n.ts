@@ -11,8 +11,8 @@ const languageDetector: LanguageDetectorAsyncModule = {
   init: () => {},
   cacheUserLanguage: () => {},
 };
-export const defaultNS = 'en';
-export const fallbackNS = 'en';
+export const defaultNS = 'common';
+export const fallbackNS = 'common';
 
 /**
  * Config i18n for app
@@ -21,12 +21,20 @@ i18next
   .use(languageDetector)
   .use(initReactI18next)
   .init({
+    returnNull: false,
     compatibilityJSON: 'v3',
     fallbackLng: 'en',
-    resources: resources,
+    resources: {
+      en: {
+        common: resources.en,
+      },
+      vi: {
+        common: resources.vi,
+      },
+    },
     lng: 'en',
     // have a common namespace used around the full app
-    ns: ['en', 'vi'],
+    ns: ['common'],
     defaultNS,
     fallbackNS,
     debug: false,
@@ -41,3 +49,4 @@ i18next
   });
 
 export default i18next;
+export const translate = i18next.t;
