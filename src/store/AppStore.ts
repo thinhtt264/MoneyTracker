@@ -1,5 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { devtools, persist, createJSONStorage } from 'zustand/middleware';
 
 interface BearState {
   firstTimeLaunch: boolean;
@@ -11,10 +12,17 @@ const useAppStore = create<BearState>()(
     persist(
       set => ({
         firstTimeLaunch: true,
-        onSetFirstTimeLaunch: () => set(() => ({ firstTimeLaunch: false })),
+        onSetFirstTimeLaunch: () =>
+          set(
+            () => ({ firstTimeLaunch: false }),
+            false,
+            'app/onSetFirstTimeLaunch',
+          ),
       }),
       {
         name: 'app-storage',
+        storage: createJSONStorage(() => AsyncStorage),
+        partialize: state => ({ firstTimeLaunch: state.firstTimeLaunch }),
       },
     ),
   ),

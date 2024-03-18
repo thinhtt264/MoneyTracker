@@ -4,9 +4,11 @@ import { BoldText, Button } from '@components';
 import { Colors, Layout } from '@themes';
 import { fontScale, kHeight, scale, translate } from '@common';
 import { Images } from '@assests';
+import { useAppStore } from '@store';
 
 const IntroductionComponent = () => {
-  const onStart = () => {};
+  const onFirstTimeLaunch = useAppStore(state => state.onSetFirstTimeLaunch);
+  const onStart = () => onFirstTimeLaunch();
 
   return (
     <View style={[Layout.fill, styles.container]}>

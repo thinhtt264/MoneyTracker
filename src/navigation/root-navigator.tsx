@@ -15,7 +15,10 @@ const RootNavigator: FC = () => {
   const firstTimeLauch = useAppStore(state => state.firstTimeLaunch);
   return (
     <RootStack.Navigator
-      screenOptions={{ headerShown: false, animation: 'fade' }}>
+      screenOptions={{
+        headerShown: false,
+        animation: 'fade',
+      }}>
       {firstTimeLauch ? (
         <RootStack.Screen
           name="IntroductionScreen"

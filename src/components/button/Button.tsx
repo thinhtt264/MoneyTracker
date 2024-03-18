@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { memo } from 'react';
-import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
 import equals from 'react-fast-compare';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { BoldText } from '../text';
@@ -23,7 +23,11 @@ const ButtonComponent = (props: ButtonProps) => {
     ...Props
   } = props;
   return (
-    <View style={styles.shadowContainer}>
+    <TouchableOpacity
+      style={[style, styles.shadowContainer]}
+      onPress={onPress}
+      disabled={disable}
+      {...Props}>
       <LinearGradient
         start={{ x: 0.463513573319529, y: -0.17187500385138885 }}
         end={{ x: 0.46351357331952914, y: 1.2343749620971305 }}
@@ -38,28 +42,25 @@ const ButtonComponent = (props: ButtonProps) => {
               size === 'default' || size === undefined ? scale(20) : scale(15),
             width: fullSize ? '100%' : 'auto',
           },
-          style,
         ]}>
-        <TouchableOpacity onPress={onPress} disabled={disable} {...Props}>
-          <BoldText
-            textStyle={[
-              styles.text,
-              { color: outline ? Colors.green.darker : Colors.white.default },
-              textStyle,
-            ]}>
-            {title}
-          </BoldText>
-          {iconRight && (
-            <Icon
-              name={iconRight.name ?? ''}
-              size={iconRight.size}
-              color={iconRight.color}
-              style={{ marginLeft: scale(5) }}
-            />
-          )}
-        </TouchableOpacity>
+        <BoldText
+          textStyle={[
+            styles.text,
+            { color: outline ? Colors.green.darker : Colors.white.default },
+            textStyle,
+          ]}>
+          {title}
+        </BoldText>
+        {iconRight && (
+          <Icon
+            name={iconRight.name ?? ''}
+            size={iconRight.size}
+            color={iconRight.color}
+            style={{ marginLeft: scale(5) }}
+          />
+        )}
       </LinearGradient>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -78,6 +79,8 @@ const styles = StyleSheet.create({
     }),
   },
   shadowContainer: {
+    backgroundColor: Colors.green.medium,
+    borderRadius: 25,
     shadowColor: Colors.green.medium,
     shadowOffset: {
       width: 0,
