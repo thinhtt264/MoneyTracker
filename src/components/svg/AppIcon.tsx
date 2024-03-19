@@ -61,3 +61,14 @@ export const BellIcon = (props: SvgProps) => (
     </Defs>
   </Svg>
 );
+
+export const CurvedIcon = (props: SvgProps) => (
+  <Svg fill="none" {...props}>
+    <Path
+      fill={props.color}
+      fillRule="evenodd"
+      d="M101.508 0H0c6.798.008 12.663 4.002 15.384 9.77C19.612 24.346 33.063 35 49.002 35h3.501c15.94 0 29.39-10.654 33.618-25.23C88.842 4.001 94.71.007 101.508 0Z"
+      clipRule="evenodd"
+    />
+  </Svg>
+);

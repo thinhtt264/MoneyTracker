@@ -1,7 +1,7 @@
 export const ColorLight = {
   primary: 'rgb(0, 122, 255)',
-  // background: 'rgb(242, 242, 242)',
-  background: 'rgb(255, 255, 255)',
+  background: 'rgb(242, 242, 242)',
+  // background: 'rgb(255, 255, 255)',
   card: 'rgb(255, 255, 255)',
   text: 'black',
   border: 'rgb(216, 216, 216)',

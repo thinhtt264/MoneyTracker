@@ -18,7 +18,12 @@ import { hasNotch } from 'react-native-device-info';
 import { HomeScreen } from '@screens';
 import { RouteNames } from '@navigation';
 import { kWidth, scale } from '@common';
-import { ChartIcon, CreditCardIcon, ProfileIcon } from '@components';
+import {
+  ChartIcon,
+  CreditCardIcon,
+  CurvedIcon,
+  ProfileIcon,
+} from '@components';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { isIos } from '../../common/device/index';
@@ -36,7 +41,7 @@ const HomeIcon = (props: Props) => {
         <View>{renderIcon(props)}</View>
       ) : (
         <View style={styles.plusIcon}>
-          <View style={[Layout.center, Layout.fill]}>
+          <View style={[Layout.fill, Layout.center]}>
             <Octicons name="plus" size={size} color={color} />
           </View>
         </View>
@@ -86,7 +91,7 @@ const renderIcon = (props: Props) => {
 const TabBar = (props: BottomTabBarProps, bottom: number) => {
   const { state, descriptors, navigation } = props;
   return (
-    <View style={[styles.container, { bottom: isIos ? bottom : scale(20) }]}>
+    <View style={[styles.container, { bottom }]}>
       <View style={{ flexDirection: 'row' }}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -139,20 +144,34 @@ const TabBar = (props: BottomTabBarProps, bottom: number) => {
               </View>
             </TouchableOpacity>
           ) : state.index === 0 ? (
-            <TouchableOpacity
+            <View
               key={label.toString()}
-              onPress={onPress}
-              style={{ flex: 1, alignItems: 'center', height: TAB_HEIGHT }}>
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                height: TAB_HEIGHT,
+              }}>
+              <View style={[Layout.absolute, Layout.colHCenter]}>
+                <CurvedIcon
+                  color={'rgb(242, 242, 242)'}
+                  height={60}
+                  width={120}
+                  viewBox={`0 0 ${100} ${50}`}
+                />
+              </View>
+
               <Animated.View
                 entering={FadeInDown.duration(100).springify()}
                 exiting={FadeOutDown.duration(100)}>
-                <HomeIcon
-                  color={Colors.white.default}
-                  size={scale(25)}
-                  name={label.toString()}
-                />
+                <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
+                  <HomeIcon
+                    color={Colors.white.default}
+                    size={scale(25)}
+                    name={label.toString()}
+                  />
+                </TouchableOpacity>
               </Animated.View>
-            </TouchableOpacity>
+            </View>
           ) : null;
         })}
       </View>
@@ -194,7 +213,7 @@ const styles = StyleSheet.create({
     right: 20,
     shadowOffset: {
       width: 0,
-      height: 0,
+      height: 6,
     },
     shadowOpacity: 0.2,
     shadowRadius: 4,
@@ -212,7 +231,7 @@ const styles = StyleSheet.create({
         height: scale(55),
         shadowOffset: {
           width: 0,
-          height: 6,
+          height: 4,
         },
         shadowOpacity: 0.5,
         shadowRadius: 5,
@@ -222,7 +241,7 @@ const styles = StyleSheet.create({
         width: scale(52),
         borderRadius: scale(52 / 2),
         height: scale(52),
-        elevation: 10,
+        elevation: 8,
       },
     }),
   },
