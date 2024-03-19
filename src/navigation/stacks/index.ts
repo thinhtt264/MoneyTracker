@@ -1,2 +1,3 @@
 import HomeStack from './HomeStack';
-export { HomeStack };
+import MainStack from './MainStack';
+export { HomeStack, MainStack };

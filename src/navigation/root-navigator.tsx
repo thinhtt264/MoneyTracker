@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 import { IntroductionScreen } from '@screens';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeStack } from './stacks';
 import { useAppStore } from '@store';
+import { MainStack } from './stacks';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 export type RootStackParamList = {
   IntroductionScreen: undefined;
-  AuthStack: undefined;
-  HomeStack: undefined;
+  MainStack: undefined;
 };
 
 const RootNavigator: FC = () => {
@@ -25,7 +24,7 @@ const RootNavigator: FC = () => {
           component={IntroductionScreen}
         />
       ) : (
-        <RootStack.Screen name="HomeStack" component={HomeStack} />
+        <RootStack.Screen name="MainStack" component={MainStack} />
       )}
     </RootStack.Navigator>
   );
