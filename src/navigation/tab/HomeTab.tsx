@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-color-literals */
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import {
   BottomTabBarProps,
@@ -86,7 +86,7 @@ const renderIcon = (props: Props) => {
 const TabBar = (props: BottomTabBarProps, bottom: number) => {
   const { state, descriptors, navigation } = props;
   return (
-    <View style={[styles.container, { bottom }]}>
+    <View style={[styles.container, { bottom: isIos ? bottom : scale(20) }]}>
       <View style={{ flexDirection: 'row' }}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -182,12 +182,12 @@ const HomeTab = () => {
   );
 };
 
-const TAB_HEIGHT = hasNotch() ? scale(65) : scale(50);
+const TAB_HEIGHT = hasNotch() ? scale(65) : scale(60);
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.white.default,
     borderRadius: scale(20),
-    elevation: 5,
+    elevation: 2,
     height: TAB_HEIGHT,
     left: 20,
     position: 'absolute',
@@ -197,24 +197,34 @@ const styles = StyleSheet.create({
       height: 0,
     },
     shadowOpacity: 0.2,
-    shadowRadius: 4.0,
+    shadowRadius: 4,
   },
   homeIcon: { alignItems: 'center', flex: 1, justifyContent: 'center' },
   plusIcon: {
     backgroundColor: '#438883',
-    borderRadius: scale(55 / 2),
-    elevation: 12,
-    height: scale(55),
     position: 'absolute',
     shadowColor: '#549994',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    top: -scale(55 / 2),
-    width: scale(55),
+    ...Platform.select({
+      ios: {
+        top: -scale(55 / 2),
+        width: scale(55),
+        borderRadius: scale(55 / 2),
+        height: scale(55),
+        shadowOffset: {
+          width: 0,
+          height: 6,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+      },
+      android: {
+        top: -scale(52 / 2),
+        width: scale(52),
+        borderRadius: scale(52 / 2),
+        height: scale(52),
+        elevation: 10,
+      },
+    }),
   },
 });
 export default HomeTab;
