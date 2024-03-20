@@ -1,50 +1,40 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-native/no-color-literals */
-import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
-import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useRef } from 'react';
 import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import Animated, {
-  FadeInDown,
-  FadeOutDown,
-  useAnimatedStyle,
-  useDerivedValue,
-} from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 import { Colors, Layout } from '@themes';
 import { hasNotch } from 'react-native-device-info';
 import { HomeScreen } from '@screens';
-import { RouteNames } from '@navigation';
-import { kWidth, scale } from '@common';
+import { isIos, scale } from '@common';
 import {
   ChartIcon,
   CreditCardIcon,
   CurvedIcon,
+  HomeActionIcon,
   ProfileIcon,
 } from '@components';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { isIos } from '../../common/device/index';
 
 interface Props {
   size: number;
   color: string;
   name?: string;
+  fabRef?: any;
 }
 const HomeIcon = (props: Props) => {
-  const { size, color, name } = props;
+  const { name, fabRef } = props;
   return (
     <View style={styles.homeIcon}>
       {name !== 'Plus' ? (
         <View>{renderIcon(props)}</View>
       ) : (
-        <View style={styles.plusIcon}>
-          <View style={[Layout.fill, Layout.center]}>
-            <Octicons name="plus" size={size} color={color} />
-          </View>
-        </View>
+        <HomeActionIcon ref={fabRef} />
       )}
     </View>
   );
@@ -88,7 +78,26 @@ const renderIcon = (props: Props) => {
     }
   }
 };
-const TabBar = (props: BottomTabBarProps, bottom: number) => {
+
+const CurvedComponent = () => {
+  const width = isIos ? scale(120) : scale(120);
+  const height = isIos ? scale(50) : scale(50);
+  return (
+    <View style={[Layout.colHCenter, styles.curved]}>
+      <CurvedIcon
+        color={'rgb(242, 242, 242)'}
+        height={height}
+        width={width}
+        viewBox={`0 0 ${100} ${50}`}
+      />
+    </View>
+  );
+};
+const TabBar = (
+  fabRef: React.MutableRefObject<any>,
+  bottom: number,
+  props: BottomTabBarProps,
+) => {
   const { state, descriptors, navigation } = props;
   return (
     <View style={[styles.container, { bottom }]}>
@@ -115,7 +124,7 @@ const TabBar = (props: BottomTabBarProps, bottom: number) => {
                 navigation.navigate(route.name);
               }
             } else {
-              navigation.navigate<RouteNames>('HomeScreen');
+              // navigation.navigate<RouteNames>('HomeScreen');
             }
           };
 
@@ -135,13 +144,11 @@ const TabBar = (props: BottomTabBarProps, bottom: number) => {
                 alignItems: 'center',
                 height: TAB_HEIGHT,
               }}>
-              <View>
-                <HomeIcon
-                  color={isFocused ? '#549994' : Colors.unActive}
-                  size={scale(25)}
-                  name={label.toString()}
-                />
-              </View>
+              <HomeIcon
+                color={isFocused ? '#549994' : Colors.unActive}
+                size={scale(25)}
+                name={label.toString()}
+              />
             </TouchableOpacity>
           ) : state.index === 0 ? (
             <View
@@ -151,25 +158,16 @@ const TabBar = (props: BottomTabBarProps, bottom: number) => {
                 alignItems: 'center',
                 height: TAB_HEIGHT,
               }}>
-              <View style={[Layout.absolute, Layout.colHCenter]}>
-                <CurvedIcon
-                  color={'rgb(242, 242, 242)'}
-                  height={60}
-                  width={120}
-                  viewBox={`0 0 ${100} ${50}`}
-                />
-              </View>
-
+              <CurvedComponent />
               <Animated.View
                 entering={FadeInDown.duration(100).springify()}
                 exiting={FadeOutDown.duration(100)}>
-                <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
-                  <HomeIcon
-                    color={Colors.white.default}
-                    size={scale(25)}
-                    name={label.toString()}
-                  />
-                </TouchableOpacity>
+                <HomeIcon
+                  fabRef={fabRef}
+                  color={Colors.white.default}
+                  size={scale(25)}
+                  name={label.toString()}
+                />
               </Animated.View>
             </View>
           ) : null;
@@ -183,6 +181,8 @@ const Tab = createBottomTabNavigator();
 
 const HomeTab = () => {
   const { bottom } = useSafeAreaInsets();
+  const fabRef = useRef<any>(null);
+
   return (
     <View style={{ flex: 1, position: 'relative' }}>
       <Tab.Navigator
@@ -190,7 +190,7 @@ const HomeTab = () => {
           headerShown: false,
           tabBarShowLabel: false,
         }}
-        tabBar={props => TabBar(props, isIos ? bottom : scale(20))}>
+        tabBar={props => TabBar(fabRef, isIos ? bottom : scale(20), props)}>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Chart" component={HomeScreen} />
         <Tab.Screen name="Plus" component={HomeScreen} />
@@ -208,9 +208,9 @@ const styles = StyleSheet.create({
     borderRadius: scale(20),
     elevation: 2,
     height: TAB_HEIGHT,
-    left: 20,
+    left: scale(20),
     position: 'absolute',
-    right: 20,
+    right: scale(20),
     shadowOffset: {
       width: 0,
       height: 6,
@@ -218,32 +218,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
   },
-  homeIcon: { alignItems: 'center', flex: 1, justifyContent: 'center' },
-  plusIcon: {
-    backgroundColor: '#438883',
+  curved: {
     position: 'absolute',
-    shadowColor: '#549994',
-    ...Platform.select({
-      ios: {
-        top: -scale(55 / 2),
-        width: scale(55),
-        borderRadius: scale(55 / 2),
-        height: scale(55),
-        shadowOffset: {
-          width: 0,
-          height: 4,
-        },
-        shadowOpacity: 0.5,
-        shadowRadius: 5,
-      },
-      android: {
-        top: -scale(52 / 2),
-        width: scale(52),
-        borderRadius: scale(52 / 2),
-        height: scale(52),
-        elevation: 8,
-      },
-    }),
+    top: 0,
+    zIndex: -999,
+  },
+  homeIcon: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 export default HomeTab;
