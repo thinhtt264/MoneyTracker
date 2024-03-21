@@ -1,14 +1,18 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import { useAppStore } from '@store';
 import { Colors, Layout } from '@themes';
 import { PortalHost } from '@gorhom/portal';
+import { Button } from '@components';
 
 const HomeScreen = () => {
   return (
-    <View style={Layout.fill}>
+    <>
+      <View style={Layout.fill}>
+        <View style={{ height: 30, backgroundColor: 'red' }} />
+        <Button />
+      </View>
       <PortalHost name="BackDropFabHost" />
-    </View>
+    </>
   );
 };
 

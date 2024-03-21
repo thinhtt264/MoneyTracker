@@ -1,5 +1,11 @@
 /* eslint-disable react-native/no-color-literals */
-import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Platform,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {
   forwardRef,
   useEffect,
@@ -116,13 +122,16 @@ const HomeActionIconComponent = forwardRef((_, ref) => {
     <>
       {isOpen ? (
         <Portal hostName="BackDropFabHost">
-          <View style={styles.backdrop} />
+          <View style={styles.backdrop}>
+            <Pressable onPress={onPress} style={Layout.fill} />
+          </View>
         </Portal>
       ) : null}
 
       <CurvedHomeTab
         color={isOpen ? Colors.backdrop.default : Colors.white.default}
       />
+
       <Animated.View
         style={(Layout.fill, Layout.center)}
         entering={FadeInDown.duration(100).springify()}
@@ -139,35 +148,47 @@ const HomeActionIconComponent = forwardRef((_, ref) => {
             />
           </Animated.View>
         </TouchableOpacity>
-        <Animated.View
-          style={[
-            Layout.center,
-            styles.floatButton,
-            styles.exchangeIcon,
-            exchangeIconStylez,
-          ]}>
-          <ExchangeIcon height={32} width={32} viewBox={`0 0 ${32} ${32}`} />
-        </Animated.View>
+        <TouchableOpacity
+          style={[Layout.center, Layout.fill, Layout.absolute]}
+          activeOpacity={0.9}>
+          <Animated.View
+            style={[
+              Layout.center,
+              styles.floatButton,
+              styles.exchangeIcon,
+              exchangeIconStylez,
+            ]}>
+            <ExchangeIcon height={32} width={32} viewBox={`0 0 ${32} ${32}`} />
+          </Animated.View>
+        </TouchableOpacity>
 
-        <Animated.View
-          style={[
-            Layout.center,
-            styles.floatButton,
-            styles.incomeIcon,
-            incomeIconStylez,
-          ]}>
-          <IncomeIcon height={32} width={32} viewBox={`0 0 ${32} ${32}`} />
-        </Animated.View>
+        <TouchableOpacity
+          style={[Layout.center, Layout.fill, Layout.absolute]}
+          activeOpacity={0.9}>
+          <Animated.View
+            style={[
+              Layout.center,
+              styles.floatButton,
+              styles.incomeIcon,
+              incomeIconStylez,
+            ]}>
+            <IncomeIcon height={32} width={32} viewBox={`0 0 ${32} ${32}`} />
+          </Animated.View>
+        </TouchableOpacity>
 
-        <Animated.View
-          style={[
-            Layout.center,
-            styles.floatButton,
-            styles.expenseIcon,
-            expenseIconStylez,
-          ]}>
-          <ExpenseIcon height={32} width={32} viewBox={`0 0 ${32} ${32}`} />
-        </Animated.View>
+        <TouchableOpacity
+          style={[Layout.center, Layout.fill, Layout.absolute]}
+          activeOpacity={0.9}>
+          <Animated.View
+            style={[
+              Layout.center,
+              styles.floatButton,
+              styles.expenseIcon,
+              expenseIconStylez,
+            ]}>
+            <ExpenseIcon height={32} width={32} viewBox={`0 0 ${32} ${32}`} />
+          </Animated.View>
+        </TouchableOpacity>
       </Animated.View>
     </>
   );

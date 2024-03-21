@@ -38,6 +38,6 @@ export default {
     default: '#0077FF',
   },
   backdrop: {
-    default: 'rgba(0, 0, 0, 0.2)',
+    default: 'rgba(0, 0, 0, 0.15)',
   },
 };

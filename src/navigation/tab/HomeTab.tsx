@@ -9,7 +9,7 @@ import {
 import { Colors } from '@themes';
 import { hasNotch } from 'react-native-device-info';
 import { HomeScreen } from '@screens';
-import { isIos, scale } from '@common';
+import { scale } from '@common';
 import {
   ChartIcon,
   CreditCardIcon,
@@ -17,7 +17,6 @@ import {
   ProfileIcon,
 } from '@components';
 import Octicons from 'react-native-vector-icons/Octicons';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface Props {
   size: number;
