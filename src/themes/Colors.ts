@@ -17,10 +17,9 @@ export default {
   grey: {
     default: '#666666',
     heading: '#3E4145',
-    body: '#4D545B',
+    body: 'rgb(242, 242, 242)',
     placeHolder: '#AFB3BF',
     stroke: '#D5D7DB',
-    blueStroke: 'rgba(199, 221, 255,0.1)',
     disable: '#D5DBE2',
     remember: '#717478',
   },
@@ -37,5 +36,8 @@ export default {
   unActive: '#AAAAAA',
   blue: {
     default: '#0077FF',
+  },
+  backdrop: {
+    default: 'rgba(0, 0, 0, 0.2)',
   },
 };

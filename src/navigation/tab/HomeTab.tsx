@@ -1,20 +1,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
-import { Colors, Layout } from '@themes';
+import { Colors } from '@themes';
 import { hasNotch } from 'react-native-device-info';
 import { HomeScreen } from '@screens';
 import { isIos, scale } from '@common';
 import {
   ChartIcon,
   CreditCardIcon,
-  CurvedIcon,
   HomeActionIcon,
   ProfileIcon,
 } from '@components';
@@ -79,28 +77,22 @@ const renderIcon = (props: Props) => {
   }
 };
 
-const CurvedComponent = () => {
-  const width = isIos ? scale(120) : scale(120);
-  const height = isIos ? scale(50) : scale(50);
-  return (
-    <View style={[Layout.colHCenter, styles.curved]}>
-      <CurvedIcon
-        color={'rgb(242, 242, 242)'}
-        height={height}
-        width={width}
-        viewBox={`0 0 ${100} ${50}`}
-      />
-    </View>
-  );
-};
 const TabBar = (
   fabRef: React.MutableRefObject<any>,
-  bottom: number,
+  isOpenFab: Boolean,
   props: BottomTabBarProps,
 ) => {
-  const { state, descriptors, navigation } = props;
+  const { state, descriptors, navigation, insets } = props;
+
   return (
-    <View style={[styles.container, { bottom }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          bottom: insets.bottom || scale(20),
+          backgroundColor: isOpenFab ? Colors.white.default : Colors.grey.body,
+        },
+      ]}>
       <View style={{ flexDirection: 'row' }}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -121,7 +113,12 @@ const TabBar = (
                 canPreventDefault: true,
               });
               if (!isFocused && !event.defaultPrevented) {
-                navigation.navigate(route.name);
+                const isOpenFAB = fabRef.current?.isOpen();
+                fabRef.current?.toggle();
+                setTimeout(
+                  () => navigation.navigate(route.name),
+                  isOpenFAB ? 150 : 0,
+                );
               }
             } else {
               // navigation.navigate<RouteNames>('HomeScreen');
@@ -158,17 +155,14 @@ const TabBar = (
                 alignItems: 'center',
                 height: TAB_HEIGHT,
               }}>
-              <CurvedComponent />
-              <Animated.View
-                entering={FadeInDown.duration(100).springify()}
-                exiting={FadeOutDown.duration(100)}>
+              <View>
                 <HomeIcon
                   fabRef={fabRef}
                   color={Colors.white.default}
                   size={scale(25)}
                   name={label.toString()}
                 />
-              </Animated.View>
+              </View>
             </View>
           ) : null;
         })}
@@ -180,8 +174,18 @@ const TabBar = (
 const Tab = createBottomTabNavigator();
 
 const HomeTab = () => {
-  const { bottom } = useSafeAreaInsets();
   const fabRef = useRef<any>(null);
+  const [isOpenFab, setOpenFab] = useState<Boolean>(false);
+
+  const isOpenObserver = (isOpen: Boolean) => {
+    setOpenFab(isOpen);
+  };
+
+  useEffect(() => {
+    if (fabRef.current) {
+      fabRef.current.isOpenObservable(isOpenObserver);
+    }
+  }, [fabRef.current]);
 
   return (
     <View style={{ flex: 1, position: 'relative' }}>
@@ -190,7 +194,7 @@ const HomeTab = () => {
           headerShown: false,
           tabBarShowLabel: false,
         }}
-        tabBar={props => TabBar(fabRef, isIos ? bottom : scale(20), props)}>
+        tabBar={props => TabBar(fabRef, isOpenFab, props)}>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Chart" component={HomeScreen} />
         <Tab.Screen name="Plus" component={HomeScreen} />
@@ -204,7 +208,6 @@ const HomeTab = () => {
 const TAB_HEIGHT = hasNotch() ? scale(65) : scale(60);
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white.default,
     borderRadius: scale(20),
     elevation: 2,
     height: TAB_HEIGHT,
@@ -217,11 +220,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 4,
-  },
-  curved: {
-    position: 'absolute',
-    top: 0,
-    zIndex: -999,
   },
   homeIcon: {
     alignItems: 'center',
