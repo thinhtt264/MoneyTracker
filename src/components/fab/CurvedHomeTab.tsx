@@ -4,10 +4,9 @@ import { CurvedIcon } from '@components';
 import { Layout } from '@themes';
 import { StyleSheet, View } from 'react-native';
 import isEqual from 'react-fast-compare';
-
+const width = isIos ? scale(120) : scale(120);
+const height = isIos ? scale(50) : scale(50);
 const CurvedComponent = ({ color = 'white' }) => {
-  const width = isIos ? scale(120) : scale(120);
-  const height = isIos ? scale(50) : scale(50);
   return (
     <View style={[Layout.colHCenter, styles.curved]}>
       <CurvedIcon

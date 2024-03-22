@@ -2,14 +2,16 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { Colors, Layout } from '@themes';
 import { PortalHost } from '@gorhom/portal';
-import { Button } from '@components';
+import { Button, RainbowCircle } from '@components';
+import LinearGradient from 'react-native-linear-gradient';
+import { scale } from '@common';
+import { Header } from './components';
 
 const HomeScreen = () => {
   return (
     <>
       <View style={Layout.fill}>
-        <View style={{ height: 30, backgroundColor: 'red' }} />
-        <Button />
+        <Header />
       </View>
       <PortalHost name="BackDropFabHost" />
     </>

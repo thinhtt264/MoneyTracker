@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Svg, { Circle, G, Path, Rect, SvgProps } from 'react-native-svg';
 import { SVGProps } from './type';
+import { Image, ImageStyle, StyleProp } from 'react-native';
+import { Images } from '@assests';
 
 const calculatePathTransform = ({
   size,
@@ -128,3 +130,73 @@ export const ExpenseIcon = (props: SvgProps) => (
     />
   </Svg>
 );
+
+export const RainbowCircle = () => {
+  const diameter = 50;
+  const radius = diameter / 2;
+  const strokeWidth = 4;
+
+  const colors = ['#DB4437', '#F4B400', '#0F9D58', '#4285F4']; // Màu của Google
+  const circumference = 2 * Math.PI * radius; // Chu vi của vòng tròn
+
+  const imgStyle: StyleProp<ImageStyle> = {
+    position: 'absolute',
+    width: radius * 2 * 0.9,
+    height: radius * 2 * 0.9,
+    borderRadius: radius * 0.9,
+    top: radius * 0.1,
+    left: radius * 0.1,
+  };
+  return (
+    <Svg width={diameter} height={diameter}>
+      {/* Vùng màu xanh dương */}
+      <Circle
+        cx={radius}
+        cy={radius}
+        r={radius - strokeWidth / 2}
+        fill="transparent"
+        stroke={colors[2]}
+        strokeWidth={strokeWidth}
+        strokeDasharray={`${circumference / 4}, ${circumference}`}
+      />
+      {/* Vùng màu vàng */}
+      <Circle
+        cx={radius}
+        cy={radius}
+        r={radius - strokeWidth / 2}
+        fill="transparent"
+        stroke={colors[1]}
+        strokeWidth={strokeWidth}
+        strokeDasharray={`${circumference / 4}, ${circumference}`}
+        strokeDashoffset={`${(4 * circumference) / 4}`}
+      />
+      {/* Vùng màu xanh lá cây */}
+      <Circle
+        cx={radius}
+        cy={radius}
+        r={radius - strokeWidth / 2}
+        fill="transparent"
+        stroke={colors[3]}
+        strokeWidth={strokeWidth}
+        strokeDasharray={`${circumference / 4}, ${circumference}`}
+        strokeDashoffset={`${circumference / 2}`}
+      />
+      {/* Vùng màu đỏ */}
+      <Circle
+        cx={radius}
+        cy={radius}
+        r={radius - strokeWidth / 2}
+        fill="transparent"
+        stroke={colors[0]}
+        strokeWidth={strokeWidth}
+        strokeDasharray={`${circumference / 4}, ${circumference}`}
+        strokeDashoffset={`${(3 * circumference) / 4}`}
+      />
+      <Image
+        source={Images.avatar_default}
+        style={imgStyle}
+        resizeMode="cover"
+      />
+    </Svg>
+  );
+};

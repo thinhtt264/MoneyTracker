@@ -148,47 +148,48 @@ const HomeActionIconComponent = forwardRef((_, ref) => {
             />
           </Animated.View>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[Layout.center, Layout.fill, Layout.absolute]}
-          activeOpacity={0.9}>
-          <Animated.View
-            style={[
-              Layout.center,
-              styles.floatButton,
-              styles.exchangeIcon,
-              exchangeIconStylez,
-            ]}>
+
+        <Animated.View
+          style={[
+            Layout.center,
+            styles.floatButton,
+            styles.exchangeIcon,
+            exchangeIconStylez,
+          ]}>
+          <TouchableOpacity
+            style={[Layout.center, styles.floatButton]}
+            activeOpacity={0.9}>
             <ExchangeIcon height={32} width={32} viewBox={`0 0 ${32} ${32}`} />
-          </Animated.View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </Animated.View>
 
-        <TouchableOpacity
-          style={[Layout.center, Layout.fill, Layout.absolute]}
-          activeOpacity={0.9}>
-          <Animated.View
-            style={[
-              Layout.center,
-              styles.floatButton,
-              styles.incomeIcon,
-              incomeIconStylez,
-            ]}>
+        <Animated.View
+          style={[
+            Layout.center,
+            styles.floatButton,
+            styles.incomeIcon,
+            incomeIconStylez,
+          ]}>
+          <TouchableOpacity
+            style={[Layout.center, styles.floatButton]}
+            activeOpacity={0.9}>
             <IncomeIcon height={32} width={32} viewBox={`0 0 ${32} ${32}`} />
-          </Animated.View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </Animated.View>
 
-        <TouchableOpacity
-          style={[Layout.center, Layout.fill, Layout.absolute]}
-          activeOpacity={0.9}>
-          <Animated.View
-            style={[
-              Layout.center,
-              styles.floatButton,
-              styles.expenseIcon,
-              expenseIconStylez,
-            ]}>
+        <Animated.View
+          style={[
+            Layout.center,
+            styles.floatButton,
+            styles.expenseIcon,
+            expenseIconStylez,
+          ]}>
+          <TouchableOpacity
+            style={[Layout.center, styles.floatButton]}
+            activeOpacity={0.9}>
             <ExpenseIcon height={32} width={32} viewBox={`0 0 ${32} ${32}`} />
-          </Animated.View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </Animated.View>
       </Animated.View>
     </>
   );
