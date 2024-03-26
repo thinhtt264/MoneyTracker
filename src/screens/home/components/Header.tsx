@@ -11,11 +11,24 @@ const HeaderComponent = () => {
         locations={[0.6, 1]}
         style={[styles.gradient, Layout.fullSize]}
       />
+      <CardInfomation />
     </View>
   );
 };
 
 export const Header = memo(HeaderComponent);
+
+const CardInfomation = () => {
+  return (
+    <View style={styles.card}>
+      <View style={styles.avatar}></View>
+
+      <View style={styles.calendar}></View>
+
+      <View style={styles.bell}></View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -3,7 +3,6 @@ import React from 'react';
 import { Colors, Layout } from '@themes';
 import { PortalHost } from '@gorhom/portal';
 import { Button, RainbowCircle } from '@components';
-import LinearGradient from 'react-native-linear-gradient';
 import { scale } from '@common';
 import { Header } from './components';
 
